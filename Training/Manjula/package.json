@@ -1,0 +1,26 @@
+{
+  "name": "google-search-automation",
+  "version": "1.0.0",
+  "description": "Browser automation script using TypeScript and Playwright",
+  "main": "test-automation.ts",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "run": "ts-node test-automation.ts",
+    "install:browsers": "npx playwright install chromium"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.41.0",
+    "@types/node": "^20.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

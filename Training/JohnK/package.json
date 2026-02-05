@@ -1,0 +1,25 @@
+{
+  "name": "playwright-google-search",
+  "version": "1.0.0",
+  "description": "Playwright test automation for Google search",
+  "scripts": {
+    "test": "playwright test",
+    "test:amazon": "playwright test amazon-tests.spec.ts",
+    "test:pom": "playwright test amazon-pom.spec.ts",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "keywords": [
+    "playwright",
+    "test",
+    "automation",
+    "typescript"
+  ],
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}

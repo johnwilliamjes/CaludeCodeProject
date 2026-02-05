@@ -1,0 +1,14 @@
+{
+    "python.analysis.extraPaths": [
+        "./check_"
+    ],
+    "modelContextProtocol": {
+        "servers": {
+            "playwright": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-playwright"],
+                "env": {}
+            }
+        }
+    }
+}
