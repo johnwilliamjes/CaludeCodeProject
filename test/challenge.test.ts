@@ -49,11 +49,31 @@ describe("pMapLimit", () => {
     await expect(pMapLimit([1], 1.5, (x) => x)).rejects.toThrow(
       /positive integer/i,
     );
+    await expect(pMapLimit([1], -1, (x) => x)).rejects.toThrow(
+      /positive integer/i,
+    );
+    await expect(pMapLimit([1], Number.NaN, (x) => x)).rejects.toThrow(
+      /positive integer/i,
+    );
+    await expect(pMapLimit([1], Number.POSITIVE_INFINITY, (x) => x)).rejects.toThrow(
+      /positive integer/i,
+    );
   });
 
   it("handles empty array", async () => {
     const result = await pMapLimit([], 2, (x) => x);
     expect(result).toEqual([]);
+  });
+
+  it("does not call mapper for empty input", async () => {
+    let calls = 0;
+    const result = await pMapLimit([], 4, () => {
+      calls += 1;
+      return "never";
+    });
+
+    expect(result).toEqual([]);
+    expect(calls).toBe(0);
   });
 
   it("supports synchronous mapper", async () => {
@@ -66,5 +86,20 @@ describe("pMapLimit", () => {
     const items = [1, 2];
     const result = await pMapLimit(items, 5, (x) => x * 10);
     expect(result).toEqual([10, 20]);
+  });
+
+  it("passes item index to mapper", async () => {
+    const items = ["a", "b", "c"];
+    const result = await pMapLimit(items, 2, (value, index) => `${index}:${value}`);
+    expect(result).toEqual(["0:a", "1:b", "2:c"]);
+  });
+
+  it("rejects when mapper throws synchronously", async () => {
+    await expect(
+      pMapLimit([1, 2], 2, (n) => {
+        if (n === 1) throw new Error("sync boom");
+        return n;
+      }),
+    ).rejects.toThrow("sync boom");
   });
 });
